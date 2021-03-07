@@ -1,3 +1,5 @@
+
+//TODO -- learn how to import this from other file *as a module?
 class Weapon{
   name;
   beats;
@@ -6,10 +8,12 @@ class Weapon{
   {
     this.name = name;
     this.beats = beats;
-    this.dies = dies;
+    this.dies = dies; //dont need it, just in case I want to add more weapons
   }
 
   //methods
+
+  //checks outcome from player perspective other weapon is computer's choice.
   checkOutcome(otherWeapon)
   {
    
@@ -22,7 +26,7 @@ class Weapon{
     }
     
     //victory
-    if(this.beats == otherWeapon.dies)
+    if(this.beats == otherWeapon.name)
     {
       console.log(this.name + " beats " + otherWeapon.name);
       console.log("Victory");
@@ -59,37 +63,46 @@ class Scissors extends Weapon
     super("SCISSORS", "PAPER", "ROCK");
   }
 }
+//----------------------------------------------
+
 
 let rock = new Rock();
 let paper = new Paper();
 let scissors = new Scissors();
+let choice = [rock, paper, scissors]
 
 function computerPlay() 
 {
-  let choice = [rock, paper, scissors]
-  console.log(choice[getRandomInt(0,3)]);
-  return choice[getRandomInt(0, 3)];
+  return choice[getRandomInteger(0, 3)];
 }
 
-function getRandomInt(min, max) 
+function humanPlay() 
+{
+  //let humanChoice = "ROCK";
+  let humanChoice = prompt("Your turn:", "Rock, Paper, Scissors").toUpperCase();
+
+  let found = choice.find(x => x.name == humanChoice);
+  return found;
+}
+
+function playRound(humanChoice, computerChoice) 
+{
+  console.log("human " + humanChoice.name);
+  console.log("cpu " + computerChoice.name);
+  humanChoice.checkOutcome(computerChoice);
+}
+
+//extra func
+function getRandomInteger(min, max) 
 {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-function playRound(computerPlay, humanPlay) 
-{
-
-}
-
-function humanPlay() 
-{
-  let choice = prompt("Your turn:", "Rock, Paper, Scissors");
-  return choice.toUpperCase();
-}
-computerPlay();
-humanPlay();
+//computerPlay();
+//humanPlay();
+playRound(humanPlay(), computerPlay());
 //console.log(computerPlay());
 
 
