@@ -1,8 +1,9 @@
+/* eslint-disable no-unused-vars */
 //TODO -- learn to import this class as a module?
 class Weapon{
-    name;
-    beats;
-    dies;
+    // name;
+    // beats;
+    // dies;
     constructor(name, beats, dies)
     {
       this.name = name;
@@ -37,6 +38,7 @@ class Weapon{
     }
   }
   
+  // eslint-disable-next-line no-unused-vars
   class Rock extends Weapon
   {
     constructor()

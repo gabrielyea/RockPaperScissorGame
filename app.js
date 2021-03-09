@@ -1,9 +1,7 @@
 
 //TODO -- learn how to import this from other file *as a module?
 class Weapon{
-  name;
-  beats;
-  dies;
+  
   constructor(name, beats, dies)
   {
     this.name = name;
@@ -71,6 +69,23 @@ let paper = new Paper();
 let scissors = new Scissors();
 let choice = [rock, paper, scissors]
 
+const weapons = document.querySelectorAll(".weapon");
+weapons.forEach(weapon => weapon.addEventListener("click", animateWeapon));
+
+weapons.forEach(weapon => weapon.addEventListener("transitionend", removeSelection));
+
+
+function removeSelection(e)
+{
+  if(e.propertyName !== "transform")
+  return;
+  // let targetName = e.target.name;
+  // let specWeapon = Array.from(weapons);
+  // specWeapon = specWeapon.find(weapon => weapon.name == targetName);
+  // specWeapon.classList.remove("using");
+  this.classList.remove("using");
+}
+
 function computerPlay() 
 {
   return choice[getRandomInteger(0, 3)];
@@ -98,6 +113,14 @@ function getRandomInteger(min, max)
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min) + min);
+}
+
+function animateWeapon(e)
+{
+  let targetName = e.target.name;
+  let specWeapon = Array.from(weapons);
+  specWeapon = specWeapon.find(weapon => weapon.name == targetName);
+  specWeapon.classList.add("using");
 }
 
 //computerPlay();
