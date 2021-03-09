@@ -71,16 +71,20 @@ let rock = new Rock();
 let paper = new Paper();
 let scissors = new Scissors();
 let choice = [rock, paper, scissors]
+let playerColumn = document.querySelector(".item4");
+let machineColumn = document.querySelector(".item5");
 
-
+const weaponsContainer = document.querySelector(".weapons")
 const weapons = document.querySelectorAll(".weapon");
 const container = document.querySelector("#container");
+const scoreContaier = document.querySelector(".score");
+const endScreen = document.querySelector(".endScreen");
+
 weapons.forEach(weapon => weapon.addEventListener("click", startGame));
 
 weapons.forEach(weapon => weapon.addEventListener("transitionend", removeSelection));
 
-
-
+endScreen.addEventListener("click", reStartGame);
 
 
 
@@ -174,22 +178,19 @@ function displayResults(outcome)
 
 function keepScore(roundMsg)
 {
-  let playerColumn = document.querySelector(".item4");
-  let machineColumn = document.querySelector(".item5");
+  playerColumn = document.querySelector(".item4");
+  machineColumn = document.querySelector(".item5");
   let victoryMark = document.createElement("p");
-  victoryMark.textContent = "X";
   let defeatMark = document.createElement("p");
+  victoryMark.textContent = "X";
   defeatMark.textContent = "O";
-  console.log(score.get("Player"));
   if(roundMsg === "VICTORY")
   {
     playerColumn.appendChild(victoryMark);
     machineColumn.appendChild(defeatMark);
     let points = score.get("Player") + 1;
     score.set("Player", points);
-    console.log("victory");
-    console.log("Score: " + score.get("Player"))
-    return;
+    
   }
   else if(roundMsg === "DEFEAT")
   {
@@ -197,10 +198,46 @@ function keepScore(roundMsg)
     playerColumn.appendChild(defeatMark);
     let points = score.get("Machine") + 1;
     score.set("Machine", points);
-    console.log("defeated");
-    console.log("Score: " + score.get("Machine"))
-    return;
+    
   }
+  checkForWinner();
+  
+}
+
+function checkForWinner()
+{
+  let message = "";
+  if(score.get("Player") > 4) 
+  {
+    message = "Player wins"
+    showEndScreen(message);
+  }
+  else if(score.get("Machine") > 4)
+  {
+    message = "Machine wins"
+    showEndScreen(message);
+  }
+}
+
+function showEndScreen(message)
+{
+  scoreContaier.classList.add("hidden");
+  weaponsContainer.classList.add("hidden");
+  endScreen.classList.remove("hidden");
+  endScreen.classList.add("show");
+
+  container.remove();
+  let m = document.createElement("p");
+  m.textContent = message;
+  endScreen.appendChild(m)
+
+
+}
+
+function reStartGame()
+{
+  console.log("Click");
+  location.reload();
 }
 //---------------------------------
 
@@ -211,7 +248,7 @@ function getRandomInteger(min, max)
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min) + min);
 }
-
+//for animation
 function removeSelection(e)
 {
   if(e.propertyName !== "transform")
