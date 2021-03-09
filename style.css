@@ -38,17 +38,50 @@ html {
     box-shadow: 0 0 1rem #ffc600;
   }
 
+
+  .show{
+    transform: scale(1);    
+  }
+
+  .hidden{
+    transform: scale(0);    
+  }
+
   .result{
+    display: grid;
     border: .4rem solid black;
     border-radius: .5rem;
     margin: 1rem;
-    font-size: 1.5rem;
-    padding: 1rem .5rem;
-    transition: all .07s ease;
-    min-height: 50vh;
-    min-width: 50vh;
+    font-size: 1.5vw;
+    padding: 3rem 1rem;   
+
     text-align: center;
     color: white;
     background: rgba(0,0,0,0.4);
     text-shadow: 0 0 .5rem black;
+
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-gap: 10px;
+    grid-template-areas:
+      "title title"
+      "content content"
+      "content content";
+  }
+  
+  .item1{
+    grid-area: title;
+  }
+
+  .item2{
+    grid-area: content;
+  }
+  
+  #container{
+    display: flex;
+    flex: 1;
+    max-height: 20vh;
+    transition: all .07s ease;    
+    justify-content: center;
+    align-items: center;
   }
