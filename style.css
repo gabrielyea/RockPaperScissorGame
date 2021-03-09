@@ -12,8 +12,10 @@ html {
   
   .weapons {
     display: flex;
-    flex: 1;
-    min-height: 50vh;
+    flex: content;
+    margin: 0 10vw;
+    min-height: 10vh;
+    min-width: 10vw;
     align-items: center;
     justify-content: center;
   }
@@ -77,10 +79,44 @@ html {
     grid-area: content;
   }
   
+  .score{
+    display: grid;
+    
+    border: .4rem solid rgb(7, 15, 88);
+    border-radius: .5rem;
+    margin: 1% 25%;
+    font-size: 2vw;
+    padding: 5rem 1rem;
+    text-align: center;
+    color: white;
+    background: rgba(0,0,0,0.4);
+    text-shadow: 0 0 .5rem black;
+    grid-gap: 1px;
+    grid-template-areas:
+      "score score"
+      "human machine"
+      "human machine";
+  }
+
+  .item3{
+    text-align: center;
+    grid-area: score;
+  }
+
+  .item4{  
+    grid-gap: 10px;
+    grid-area: human;
+  }
+
+  .item5{
+    text-align: center;
+    grid-area: machine;
+  }
+
   #container{
     display: flex;
     flex: 1;
-    max-height: 20vh;
+    max-height: 50vh;
     transition: all .07s ease;    
     justify-content: center;
     align-items: center;
