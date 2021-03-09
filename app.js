@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 
 //TODO -- learn how to import this from other file *as a module?
 class Weapon{
@@ -69,7 +70,9 @@ let paper = new Paper();
 let scissors = new Scissors();
 let choice = [rock, paper, scissors]
 
+
 const weapons = document.querySelectorAll(".weapon");
+const container = document.querySelector("#container");
 weapons.forEach(weapon => weapon.addEventListener("click", animateWeapon));
 
 weapons.forEach(weapon => weapon.addEventListener("transitionend", removeSelection));
@@ -79,10 +82,6 @@ function removeSelection(e)
 {
   if(e.propertyName !== "transform")
   return;
-  // let targetName = e.target.name;
-  // let specWeapon = Array.from(weapons);
-  // specWeapon = specWeapon.find(weapon => weapon.name == targetName);
-  // specWeapon.classList.remove("using");
   this.classList.remove("using");
 }
 
@@ -121,11 +120,20 @@ function animateWeapon(e)
   let specWeapon = Array.from(weapons);
   specWeapon = specWeapon.find(weapon => weapon.name == targetName);
   specWeapon.classList.add("using");
+  displayResults();
 }
 
+function displayResults()
+{
+  let res = document.createElement("div");
+  res.textContent = "Hello";
+  res.classList.add("result");
+  container.appendChild(res);
+
+}
 //computerPlay();
 //humanPlay();
-playRound(humanPlay(), computerPlay());
+//playRound(humanPlay(), computerPlay());
 //console.log(computerPlay());
 
 
